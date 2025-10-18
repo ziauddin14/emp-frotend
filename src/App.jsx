@@ -2,9 +2,8 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
-import AdminDashboard from "./pages/AdminDashboard";
 import AdminBody from "./components/dashboard/AdminBody";
-import EmployeeDashboard from "./pages/EmployeeDashboard";
+import Admindashboard from "./pages/Admindashboard";
 import PrivetRoutes from "./utils/PrivetRoutes";
 import ProtustedRoutes from "./utils/ProtustedRoutes";
 import DepartmentList from "./components/department/DepartmentList";
@@ -37,7 +36,7 @@ function App() {
         element={
           <PrivetRoutes>
             <ProtustedRoutes requiredRole={["admin"]}>
-              <AdminDashboard />
+              <Admindashboard />
             </ProtustedRoutes>
           </PrivetRoutes>
         }
@@ -75,7 +74,7 @@ function App() {
         element={
           <PrivetRoutes>
             <ProtustedRoutes>
-              <EmployeeDashboard requiredRole={["admin", "employee"]} />
+              <Admindashboard requiredRole={["admin", "employee"]} />
             </ProtustedRoutes>
           </PrivetRoutes>
         }
