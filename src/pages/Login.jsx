@@ -22,7 +22,7 @@ const Login = () => {
 
     console.log("Form submitted with:", { email, password });
     try {
-      const response = await axios.post("/auth/login", { email, password }););
+      const response = await axios.post("/auth/login", { email, password });
       if (response.status === 200) {
         console.log("Login successful:", response.data);
         login(response.data.user);
