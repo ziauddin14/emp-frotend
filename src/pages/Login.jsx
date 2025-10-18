@@ -4,57 +4,55 @@ import { useState } from "react";
 import { useAuth } from "../context/authContex";
 import { useNavigate } from "react-router-dom";
 import { FaBuilding, FaEnvelope, FaLock, FaSignInAlt, FaEye, FaEyeSlash } from "react-icons/fa";
+import axiosInstance from "../axiosConfig";
 
 const Login = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [showPassword, setShowPassword] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
-    const { login } = useAuth();
-    const navigation = useNavigate();
-    
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        setError("");
-        
-        console.log("Form submitted with:", { email, password });
-        try {
-            const response = await axios.post("http://localhost:4000/api/auth/login", {
-                email,
-                password
-            });
-            if (response.status === 200) {
-                console.log("Login successful:", response.data);
-                login(response.data.user);
-                localStorage.setItem("token", response.data.token);
-                if (response.data.user.role === "admin") {
-                    navigation("/admin-dashboard");
-                } else {
-                    navigation("/employee-dashboard");
-                }
-            } else {
-                console.error("Login failed:", response.data);
-                setError("Login failed. Please try again.");
-            }
-        } catch (error) {
-            console.error("Error occurred during login:", error);
-            if (error.response?.data?.message) {
-                setError(error.response.data.message);
-            } else {
-                setError("Login failed. Please check your credentials.");
-            }
-        } finally {
-            setLoading(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const { login } = useAuth();
+  const navigation = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    console.log("Form submitted with:", { email, password });
+    try {
+      const response = await axios.post("/auth/login", { email, password }););
+      if (response.status === 200) {
+        console.log("Login successful:", response.data);
+        login(response.data.user);
+        localStorage.setItem("token", response.data.token);
+        if (response.data.user.role === "admin") {
+          navigation("/admin-dashboard");
+        } else {
+          navigation("/employee-dashboard");
         }
-    };
+      } else {
+        console.error("Login failed:", response.data);
+        setError("Login failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error occurred during login:", error);
+      if (error.response?.data?.message) {
+        setError(error.response.data.message);
+      } else {
+        setError("Login failed. Please check your credentials.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8"
-         style={{
-           background: "radial-gradient(1200px 600px at 10% -10%, rgba(59,130,246,0.18), transparent), radial-gradient(1200px 600px at 90% 110%, rgba(16,185,129,0.18), transparent)"
-         }}>
+      style={{
+        background: "radial-gradient(1200px 600px at 10% -10%, rgba(59,130,246,0.18), transparent), radial-gradient(1200px 600px at 90% 110%, rgba(16,185,129,0.18), transparent)"
+      }}>
       <div className="max-w-md w-full space-y-8">
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 sm:p-10">
           {/* Header Section */}
@@ -94,7 +92,7 @@ const Login = () => {
                 required
               />
             </div>
-            
+
             <div>
               <label htmlFor="password" className="label flex items-center gap-2">
                 <FaLock className="text-gray-500" />
@@ -130,8 +128,8 @@ const Login = () => {
               </a>
             </div>
 
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               disabled={loading}
               className="btn btn-primary w-full flex items-center justify-center gap-2 py-3 text-lg font-semibold"
             >
