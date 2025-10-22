@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../../axiosConfig";
 import { FaArrowLeft, FaUser, FaIdCard, FaCalendarAlt, FaVenusMars, FaBuilding, FaHeart, FaEnvelope, FaDollarSign, FaBriefcase } from "react-icons/fa";
 
 const View = () => {
@@ -13,8 +13,8 @@ const View = () => {
     console.log("Employee ID from URL:", id);
     const fetchEmployee = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:4000/api/employee/single/${id}`,
+        const response = await axiosInstance.get(
+          `/employee/single/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

@@ -4,9 +4,8 @@ import DataTable from "react-data-table-component";
 import { useEffect } from "react";
 import DepartmentButtons, { columns } from "./DepartmentHelper";
 import { useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../axiosConfig";
 import { FaBuilding, FaPlus, FaSearch, FaUsers } from "react-icons/fa";
-
 const DepartmentList = () => {
   const [departments, setDepartments] = useState([]);
   const [depLoading, setDepLoading] = useState(false);
@@ -23,7 +22,7 @@ const DepartmentList = () => {
     const fetchDepartments = async () => {
       setDepLoading(true);
       try {
-        const response = await axios.get("http://localhost:4000/api/department", {
+        const response = await axiosInstance.get("/department", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

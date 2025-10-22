@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/authContex';
-import axios from 'axios';
+import axiosInstance from '../../axiosConfig';
 import { FaCalendarAlt, FaPlus, FaSearch, FaClock, FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 
 const LeaveList = () => {
@@ -14,7 +14,7 @@ const LeaveList = () => {
   const fetchLeave = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:4000/api/leave/${id}`, {
+      const response = await axiosInstance.get(`/leave/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

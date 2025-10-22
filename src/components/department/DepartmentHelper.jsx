@@ -1,6 +1,7 @@
-import react from "react";
-import axios from "axios";
-import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
+
+import axiosInstance from "../../axiosConfig";
+import { FaEdit, FaTrash } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 export const columns = [
   {  
@@ -35,9 +36,6 @@ export const columns = [
   },
 ];
 
-import React from "react";
-import { useNavigate } from "react-router-dom";
-
 const DepartmentButtons = ({ _id, onDepartmentDelete }) => {
   const navigate = useNavigate();
   
@@ -47,8 +45,8 @@ const DepartmentButtons = ({ _id, onDepartmentDelete }) => {
     }
     
     try {
-      const response = await axios.delete(
-        `http://localhost:4000/api/department/single?id=${id}`,
+      const response = await axiosInstance.delete(
+        `/department/single?id=${id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

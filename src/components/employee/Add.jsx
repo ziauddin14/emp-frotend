@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { fetchDepartments } from "../../utils/EmployeeHalper";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FaUserPlus, FaArrowLeft, FaSave } from "react-icons/fa";
-
+import axiosInstance from "../../axiosConfig";
 const Add = () => {
   const [departments, setDepartments] = useState([]);
   const [formData, setFormData] = useState({});
@@ -38,8 +37,8 @@ const Add = () => {
   });
 
   try {
-    const response = await axios.post(
-      "http://localhost:4000/api/employee/add",
+    const response = await axiosInstance.post(
+      "/employee/add",
       formDataObj, 
       {
         headers: {

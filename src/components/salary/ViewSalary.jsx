@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { FaDollarSign, FaArrowLeft, FaSearch, FaCalendarAlt, FaChartLine } from "react-icons/fa";
-
+import axiosInstance from "../../axiosConfig";
 const ViewSalary = () => {
   const [salaries, setSalaries] = useState([]);
   const [filteredSalaries, setFilteredSalaries] = useState([]);
@@ -14,7 +14,7 @@ const ViewSalary = () => {
   const fetchSalaries = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:4000/api/salary/${id}`, {
+      const response = await axiosInstance.get(`/salary/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

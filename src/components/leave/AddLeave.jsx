@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../../context/authContex";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../../axiosConfig";
 import { FaCalendarAlt, FaArrowLeft, FaSave, FaPlus } from "react-icons/fa";
 
 const AddLeave = () => {
@@ -26,8 +26,8 @@ const AddLeave = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/leave/add",
+      const response = await axiosInstance.post(
+        "/leave/add",
         leave,
         {
           headers: {

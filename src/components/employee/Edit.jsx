@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { fetchDepartments } from "../../utils/EmployeeHalper";
 import { FaEdit, FaArrowLeft, FaSave, FaUser } from "react-icons/fa";
-
+import axiosInstance from "../../axiosConfig";
 const Edit = () => {
   const { id } = useParams();
   const [employee, setEmployee] = useState(null);
@@ -23,7 +22,7 @@ const Edit = () => {
   useEffect(() => {
     const fetchEmployee = async () => {
       try {
-        const response = await axios.get(
+        const response = await axiosInstance.get(
           `http://localhost:4000/api/employee/single/${id}`,
           {
             headers: {
@@ -71,8 +70,8 @@ const Edit = () => {
     e.preventDefault();
     setSubmitting(true);
     try {
-      const response = await axios.put(
-        `http://localhost:4000/api/employee/update/${id}`,
+      const response = await axiosInstance.put(
+        `/employee/update/${id}`,
         employee,
         {
           headers: {

@@ -1,8 +1,7 @@
-import axios from "axios";
+import axiosInstance from "../../axiosConfig";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaBuilding, FaArrowLeft, FaSave, FaPlus } from "react-icons/fa";
-
 const AddDepartments = () => {
     const [department, setDepartment] = useState({
         dep_name: '',
@@ -21,7 +20,7 @@ const AddDepartments = () => {
         setLoading(true);
         
         try {
-            const response = await axios.post('http://localhost:4000/api/department/add', department, {
+            const response = await axiosInstance.post('/department/add', department, {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem('token')}`
                 }

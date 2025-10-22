@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../../axiosConfig";
 import { fetchDepartments, getEmploye } from "../../utils/EmployeeHalper";
 import { FaDollarSign, FaArrowLeft, FaSave, FaCalculator } from "react-icons/fa";
 
@@ -37,8 +37,8 @@ const AddSalary = () => {
     }
     const fetchEmployee = async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:4000/api/employee/single/${id}`,
+        const res = await axiosInstance.get(
+          `/employee/single/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -84,8 +84,8 @@ const AddSalary = () => {
     console.log("📤 Salary Data Sent:", salaryData);
 
     try {
-      const res = await axios.post(
-        "http://localhost:4000/api/salary/add",
+      const res = await axiosInstance.post(
+        "/salary/add",
         salaryData,
         {
           headers: {

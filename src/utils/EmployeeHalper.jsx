@@ -1,10 +1,10 @@
-import axios from "axios";
+import axiosInstance from "../axiosConfig";
 import { useNavigate } from "react-router-dom";
 import react from "react";
 export const fetchDepartments = async () => {
   let departments;
   try {
-    const response = await axios.get("http://localhost:4000/api/department", {
+    const response = await axiosInstance.get("/department", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -27,7 +27,7 @@ export const fetchDepartments = async () => {
 export const getEmploye = async (id) => {
   let employees;
   try {
-    const response = await axios.get(
+    const response = await axiosInstance.get(
       `http://localhost:4000/api/employee/department/${id}`,
       {
         headers: {
@@ -48,7 +48,6 @@ export const getEmploye = async (id) => {
   }
   return employees;
 };
-import React from "react";
 
 const EmployeeButtons = ({ _id }) => {
   const navigate = useNavigate();

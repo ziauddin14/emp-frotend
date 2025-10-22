@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../../axiosConfig";
 import { FaCalendarAlt, FaArrowLeft, FaUser, FaIdCard, FaBuilding, FaClock, FaCheckCircle, FaTimesCircle, FaFileAlt } from "react-icons/fa";
 
 const LeaveDetails = () => {
@@ -14,8 +14,8 @@ const LeaveDetails = () => {
     console.log("Employee ID from URL:", id);
     const fetchLeave = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:4000/api/leave/detail/${id}`,
+        const response = await axiosInstance.get(
+          `/leave/detail/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -63,8 +63,8 @@ const LeaveDetails = () => {
   const changeStatus = async (id, status) => {
     setUpdating(true);
     try {
-      const response = await axios.put(
-        `http://localhost:4000/api/leave/${id}`,
+      const response = await axiosInstance.put(
+        `/leave/${id}`,
         { status },
         {
           headers: {

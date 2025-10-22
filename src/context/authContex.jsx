@@ -1,7 +1,7 @@
-import axios from "axios";
+
 import React, { useEffect, createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import axiosInstance from "../axiosConfig";
 const userContext = createContext();
 
 const AuthContext = ({ children }) => {
@@ -24,7 +24,7 @@ const AuthContext = ({ children }) => {
       try {
         const token = localStorage.getItem("token");
         if (token) {
-          const response = await axios.get("http://localhost:4000/api/auth/verify", {
+          const response = await axiosInstance.get("/auth/verify", {
             headers: {
               Authorization: `Bearer ${token}`,
             },

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../../axiosConfig";
 import { FaUser, FaIdCard, FaCalendarAlt, FaVenusMars, FaBuilding, FaHeart, FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
 
 const Profile = () => {
@@ -11,8 +11,8 @@ const Profile = () => {
   useEffect(() => {
     const fetchEmployee = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:4000/api/employee/single/${id}`,
+        const response = await axiosInstance.get(
+          `/employee/single/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

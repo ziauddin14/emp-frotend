@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../../axiosConfig";
 import { FaBuilding, FaArrowLeft, FaSave, FaEdit } from "react-icons/fa";
-
 const EditDepartment = () => {
   const { id } = useParams();
   const [department, setDepartment] = useState({
@@ -17,8 +16,8 @@ const EditDepartment = () => {
     const fetchDepartment = async () => {
       setDepLoading(true);
       try {
-        const response = await axios.get(
-          `http://localhost:4000/api/department/single?id=${id}`,
+        const response = await axiosInstance.get(
+          `/department/single?id=${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -56,8 +55,8 @@ const EditDepartment = () => {
     setSubmitting(true);
     
     try {
-      const response = await axios.put(
-        `http://localhost:4000/api/department/${id}`,
+      const response = await axiosInstance.put(
+        `/department/${id}`,
         department,
         {
           headers: {

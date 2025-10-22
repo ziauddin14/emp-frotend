@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import DataTable from "react-data-table-component";
 import EmployeeButtons, { columns } from "../../utils/EmployeeHalper";
-import axios from "axios";
+import axiosInstance from "../../axiosConfig";
 import { FaSearch, FaPlus, FaUsers } from "react-icons/fa";
 
 const List = () => {
@@ -15,7 +15,7 @@ const List = () => {
     const fetchEmployee = async () => {
       setEmploading(true);
       try {
-        const response = await axios.get("http://localhost:4000/api/employee", {
+        const response = await axiosInstance.get("/employee", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
