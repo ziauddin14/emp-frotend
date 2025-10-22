@@ -9,8 +9,7 @@ import {
   FaTimesCircle,
   FaUsers,
 } from "react-icons/fa";
-import axios from "axios";
-
+import axiosInstance from "../../axiosConfig";
 const AdminBody = () => {
   const [body, setBody] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -21,10 +20,8 @@ const AdminBody = () => {
         const token = localStorage.getItem("token");
         console.log("Token:", token);
 
-        const response = await axios.get("http://localhost:4000/api/dashboard/body", {
-          headers: {
-            "Authorization": `Bearer ${token}`
-          }
+        const response = await axiosInstance.get("/dashboard/body", {
+          headers: { Authorization: `Bearer ${token}` },
         });
 
         console.log("Dashboard Data:", response.data);
@@ -106,7 +103,7 @@ const AdminBody = () => {
             Track and manage employee leave requests
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           <BodyCards
             icons={<FaFileAlt />}
