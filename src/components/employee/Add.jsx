@@ -35,7 +35,10 @@ const Add = () => {
   Object.keys(formData).forEach((key) => {
     formDataObj.append(key, formData[key]);
   });
-
+  for (let [key, value] of formDataObj.entries()) {
+    console.log(key, value);
+  }
+  
   try {
     const response = await axiosInstance.post(
       "/employee/add",
